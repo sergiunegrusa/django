@@ -12,20 +12,20 @@ def product_detail_view(request):
     return render(request, 'product/detail.html', context)
 
 
-# def product_create_view(request):
-#     form = ProductForm(request.POST or None)
-#     if form.is_valid():
-#         form.save()
-#         form = ProductForm()
-#     # obj = Product.objects.get(id=1)
-#     # context = {
-#     #     'title': obj.title,
-#     #     'description': obj.description,
-#     #     }
-#     context = {
-#         'form': form,
-#     }
-#     return render(request, 'product/product_create_view.html', context)
+def product_create_view(request):
+    form = ProductForm(request.POST or None)
+    if form.is_valid():
+        form.save()
+        form = ProductForm()
+    # obj = Product.objects.get(id=1)
+    # context = {
+    #     'title': obj.title,
+    #     'description': obj.description,
+    #     }
+    context = {
+        'form': form,
+    }
+    return render(request, 'product/product_create_view.html', context)
 
 # def product_create_view(request):
 #     # print(request.POST)
@@ -36,9 +36,16 @@ def product_detail_view(request):
 #     context = {}
 #     return render(request, 'product/product_create_view.html', context)
 
-def product_create_view(request):
-    form = RawProductForm()
-    context = {
-        'form': form,
-    }
-    return render(request, 'product/product_create_view.html', context)
+# def product_create_view(request):
+#     form = RawProductForm()
+#     if request.method == 'POST':
+#         form = RawProductForm(request.POST)
+#         if form.is_valid():
+#             print(form.cleaned_data)
+#             Product.objects.create(**form.cleaned_data)
+#         else:
+#             print(form.errors)
+#     context = {
+#         'form': form,
+#     }
+#     return render(request, 'product/product_create_view.html', context)
