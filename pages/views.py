@@ -24,3 +24,7 @@ def about_view(request, *args, **kwargs):
         'my_list': [12, 124, 'String', True]
     }
     return render(request, 'about.html', my_context)
+
+
+
+
