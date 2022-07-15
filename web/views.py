@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.http import Http404
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .forms import ProductForm, RawProductForm
 from .models import Product
@@ -9,7 +10,7 @@ def product_detail_view(request):
     context = {
         'object': obj,
     }
-    return render(request, 'product/detail.html', context)
+    return render(request, 'product/product_detail.html', context)
 
 
 def product_create_view(request):
@@ -49,3 +50,28 @@ def product_create_view(request):
 #         'form': form,
 #     }
 #     return render(request, 'product/product_create_view.html', context)
+
+def render_initial_data(request):
+    initial_data = {
+        'title': 'New Title',
+    }
+
+    obj = Product.objects.get(id=1)
+    print(obj.title)
+    form = ProductForm(request.POST or None, instance=obj)
+    if form.is_valid():
+        form.save()
+    context = {
+        'form': form,
+    }
+
+    return render(request,'product/product_create_view.html', context)
+
+ 
+def dynamic_lookup_view(request, id):
+    obj = Product.objects.get(id=id)
+    obj = get_object_or_404(Product, id=id)
+    context = {
+        'object': obj
+    }
+    return render(request, 'product/product_detail.html', context)
