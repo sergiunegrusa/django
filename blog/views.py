@@ -59,3 +59,8 @@ class ArticleDeleteView(DeleteView):
 
     def get_success_url(self):
         return reverse('articles:article-list')
+
+
+
+
+

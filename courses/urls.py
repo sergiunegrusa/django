@@ -1,10 +1,14 @@
 from django.urls import reverse, path
 from .views import (
     CourseView,
-    my_fbv,
+    CourseListView,
+    CourseCreateView,
+    # my_fbv,
 )
 
 app_name = 'courses'
 urlpatterns = [
-    path('', CourseView.as_view(template_name='contact.html'), name='course-list')
+    path('', CourseListView.as_view(), name='course-list'),
+    path('create/', CourseCreateView.as_view(), name='course-create'),
+    path('<int:id>/', CourseView.as_view(), name='courses-detail'),
 ]
